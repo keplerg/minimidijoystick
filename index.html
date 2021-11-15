@@ -1,0 +1,115 @@
+<!doctype html>
+<hmtl>
+<head>
+  <title>miniMIDI Joystick</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="wrapper"> 
+<nav>
+  <select id="output-select">
+    <option value="">Select MIDI Device</option>
+  </select>
+  <ul>
+    <li id="nav-0"><a href="javascript:navSelect(0);">Select</a></li>
+    <li id="nav-1"><a href="javascript:navSelect(1);">Program</a></li>
+    <li id="nav-2"><a href="javascript:navSelect(2);">Realtime</a></li>
+  </ul>
+  <p>MMJ</p>
+</nav>
+<div id="screens"> 
+  <section id="programs">
+    <div class="grid">
+      <div id="program-0"><a href="javascript:selectProgram(0);">1</a></div>
+      <div id="program-1"><a href="javascript:selectProgram(1);">2</a></div>
+      <div id="program-2"><a href="javascript:selectProgram(2);">3</a></div>
+      <div id="program-3"><a href="javascript:selectProgram(3);">4</a></div>
+      <div id="program-4"><a href="javascript:selectProgram(4);">5</a></div>
+      <div id="program-5"><a href="javascript:selectProgram(5);">6</a></div>
+      <div id="program-6"><a href="javascript:selectProgram(6);">7</a></div>
+      <div id="program-7"><a href="javascript:selectProgram(7);">8</a></div>
+      <div id="program-8"><a href="javascript:selectProgram(8);">9</a></div>
+      <div id="program-9"><a href="javascript:selectProgram(9);">10</a></div>
+      <div id="program-10"><a href="javascript:selectProgram(10);">11</a></div>
+      <div id="program-11"><a href="javascript:selectProgram(11);">12</a></div>
+      <div id="program-12"><a href="javascript:selectProgram(12);">13</a></div>
+      <div id="program-13"><a href="javascript:selectProgram(13);">14</a></div>
+      <div id="program-14"><a href="javascript:selectProgram(14);">15</a></div>
+      <div id="program-15"><a href="javascript:selectProgram(15);">16</a></div>
+    </div>
+  </section>
+  <section id="program">
+    <label>Program
+      <select name="program" id="program">
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+        <option value="4">5</option>
+        <option value="5">6</option>
+        <option value="6">7</option>
+        <option value="7">8</option>
+        <option value="8">9</option>
+        <option value="9">10</option>
+        <option value="10">11</option>
+        <option value="11">12</option>
+        <option value="12">13</option>
+        <option value="13">14</option>
+        <option value="14">15</option>
+        <option value="15">16</option>
+      </select>
+    </label>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <label>Direction
+      <select name="direction" id="direction">
+        <option value="pressEast">Press East</option>
+        <option value="pressWest">Press West</option>
+        <option value="pressSouth">Press South</option>
+        <option value="pressNorth">Press North</option>
+        <option value="releaseEast">Release East</option>
+        <option value="releaseWest">Release West</option>
+        <option value="releaseSouth">Release South</option>
+        <option value="releaseNorth">Release North</option>
+      </select>
+    </label>
+    <label>Action
+      <select name="action" id="action">
+        <option value="noteOff">Note Off</option>
+        <option value="noteOn">Note On</option>
+        <option value="keyAftertouch">Key Aftertouch</option>
+        <option value="controllerCode">Controller Code</option>
+        <option value="programChange">Program Change</option>
+        <option value="channelAftertouch">Channel Aftertouch</option>
+        <option value="pitchBend">Pitch Bend</option>
+      </select>
+    </label>
+    <label>Channel
+      <select name="channel" id="channel">
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+        <option value="4">5</option>
+        <option value="5">6</option>
+        <option value="6">7</option>
+        <option value="7">8</option>
+        <option value="8">9</option>
+        <option value="9">10</option>
+        <option value="10">11</option>
+        <option value="11">12</option>
+        <option value="12">13</option>
+        <option value="13">14</option>
+        <option value="14">15</option>
+        <option value="15">16</option>
+      </select>
+    </label>
+  </section>
+</div>
+</div>
+<script src="javascript/main.js"></script>
+</body>
+</html>

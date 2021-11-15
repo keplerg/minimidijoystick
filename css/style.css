@@ -1,0 +1,211 @@
+@font-face {
+    font-family: "Lobster";
+    src: url("../fonts/Lobster-Regular.ttf");
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+body {
+    background: radial-gradient(#111628, #0b0f1d);
+    font-family: 'Roboto Mono', Arial, sans-serif;
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(24, 56, 24, 0.57), rgba(40, 109, 40, 0.68));
+    opacity: 0;
+    transition: 150ms ease;
+    z-index: -1;
+    will-change: opacity;
+}
+body.success::before {
+    animation: success 2.5s;
+}
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(244, 67, 54, 0.8), rgba(206, 55, 44, 0.48));
+    opacity: 0;
+    transition: 500ms ease;
+    z-index: -1;
+    will-change: opacity;
+}
+body.gameover::after {
+    opacity: 1;
+}
+
+#wrapper {
+    overflow: hidden;
+    height: 100vh;
+    color: #fff;
+}
+
+select {
+    font-size: 2vw;
+}
+
+#output-select {
+    float: right;
+}
+
+#screens {
+    width: 200%; /* 100*# of sections */
+    height: 80%;
+    font-size: 2vw;
+    /* border: solid #f99 2px; */
+    display: flex;
+    align-items: center;
+    transition: 500ms ease;
+    will-change: transform;
+}
+
+nav {
+    height: 20%;
+    line-height: 5vw;;
+}
+
+nav ul {
+    font-size: 3vw;
+}
+
+nav ul li {
+    list-style: none;
+    float: left;
+    border: solid 1px #fff;
+}
+
+nav a {
+    display: inline-block;
+    padding: 0 1vw;
+    width: 100%;
+    height: 100%;
+}
+
+nav select {
+    padding: .5vw;
+}
+
+nav p {
+    font-family: Lobster, script;
+    font-size: 5vw;;
+    font-style: italic;
+    text-align: center;
+    margin: 0 auto;
+    color: gold;
+}
+
+section {
+    flex: 1 1 100%;
+    height: 100%;
+    /* border: solid #fff 2px; */
+    text-align: center;
+    padding: 2em;
+    overflow-y: auto;
+}
+
+.note {
+    display: inline-block;
+}
+
+.note svg {
+    width: 55px;
+    height: 75px;
+    transform: translateY(150px);
+    transition: 150ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.note.on svg {
+    transform: translateY(0px);
+}
+
+.grid {
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 10%);
+    grid-auto-rows: 1fr;
+}
+
+.grid::before {
+    content: '';
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+
+.grid > *:first-child {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+
+/* Just to make the grid visible */
+
+.grid > * {
+    background: rgba(0,0,0,0.1);
+    border: 1px white solid;
+    line-height: 4em;
+}
+
+.grid a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+nav ul a:link,
+nav ul a:hover,
+nav ul a:active,
+nav ul a:focus,
+nav ul a:visited,
+.grid a:link,
+.grid a:hover,
+.grid a:active,
+.grid a:focus,
+.grid a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+@keyframes success {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
