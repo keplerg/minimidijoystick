@@ -7,41 +7,41 @@
 <body>
 
 <div id="wrapper"> 
+<h1>MMJ</h1>
 <nav>
   <select id="output-select">
     <option value="">Select MIDI Device</option>
   </select>
   <ul>
-    <li id="nav-0"><a href="javascript:navSelect(0);">Select</a></li>
+    <li id="nav-0"><a href="javascript:navSelect(0);">Preset</a></li>
     <li id="nav-1"><a href="javascript:navSelect(1);">Program</a></li>
     <li id="nav-2"><a href="javascript:navSelect(2);">Realtime</a></li>
   </ul>
-  <p>MMJ</p>
 </nav>
 <div id="screens"> 
-  <section id="programs">
+  <section id="preset-select">
     <div class="grid">
-      <div id="program-0"><a href="javascript:selectProgram(0);">1</a></div>
-      <div id="program-1"><a href="javascript:selectProgram(1);">2</a></div>
-      <div id="program-2"><a href="javascript:selectProgram(2);">3</a></div>
-      <div id="program-3"><a href="javascript:selectProgram(3);">4</a></div>
-      <div id="program-4"><a href="javascript:selectProgram(4);">5</a></div>
-      <div id="program-5"><a href="javascript:selectProgram(5);">6</a></div>
-      <div id="program-6"><a href="javascript:selectProgram(6);">7</a></div>
-      <div id="program-7"><a href="javascript:selectProgram(7);">8</a></div>
-      <div id="program-8"><a href="javascript:selectProgram(8);">9</a></div>
-      <div id="program-9"><a href="javascript:selectProgram(9);">10</a></div>
-      <div id="program-10"><a href="javascript:selectProgram(10);">11</a></div>
-      <div id="program-11"><a href="javascript:selectProgram(11);">12</a></div>
-      <div id="program-12"><a href="javascript:selectProgram(12);">13</a></div>
-      <div id="program-13"><a href="javascript:selectProgram(13);">14</a></div>
-      <div id="program-14"><a href="javascript:selectProgram(14);">15</a></div>
-      <div id="program-15"><a href="javascript:selectProgram(15);">16</a></div>
+      <div id="preset-0"><a href="javascript:selectPreset(0);">1</a></div>
+      <div id="preset-1"><a href="javascript:selectPreset(1);">2</a></div>
+      <div id="preset-2"><a href="javascript:selectPreset(2);">3</a></div>
+      <div id="preset-3"><a href="javascript:selectPreset(3);">4</a></div>
+      <div id="preset-4"><a href="javascript:selectPreset(4);">5</a></div>
+      <div id="preset-5"><a href="javascript:selectPreset(5);">6</a></div>
+      <div id="preset-6"><a href="javascript:selectPreset(6);">7</a></div>
+      <div id="preset-7"><a href="javascript:selectPreset(7);">8</a></div>
+      <div id="preset-8"><a href="javascript:selectPreset(8);">9</a></div>
+      <div id="preset-9"><a href="javascript:selectPreset(9);">10</a></div>
+      <div id="preset-10"><a href="javascript:selectPreset(10);">11</a></div>
+      <div id="preset-11"><a href="javascript:selectPreset(11);">12</a></div>
+      <div id="preset-12"><a href="javascript:selectPreset(12);">13</a></div>
+      <div id="preset-13"><a href="javascript:selectPreset(13);">14</a></div>
+      <div id="preset-14"><a href="javascript:selectPreset(14);">15</a></div>
+      <div id="preset-15"><a href="javascript:selectPreset(15);">16</a></div>
     </div>
   </section>
   <section id="program">
-    <label>Program
-      <select name="program" id="program">
+    <label>Preset
+      <select name="preset" id="program-preset">
         <option value="0">1</option>
         <option value="1">2</option>
         <option value="2">3</option>
@@ -65,7 +65,7 @@
     <hr>
     <br>
     <label>Direction
-      <select name="direction" id="direction">
+      <select name="direction" id="program-direction">
         <option value="pressEast">Press East</option>
         <option value="pressWest">Press West</option>
         <option value="pressSouth">Press South</option>
@@ -77,18 +77,18 @@
       </select>
     </label>
     <label>Action
-      <select name="action" id="action">
+      <select name="action" id="program-action">
         <option value="noteOff">Note Off</option>
         <option value="noteOn">Note On</option>
         <option value="keyAftertouch">Key Aftertouch</option>
-        <option value="controllerCode">Controller Code</option>
+        <option value="controlChange">Control Change</option>
         <option value="programChange">Program Change</option>
         <option value="channelAftertouch">Channel Aftertouch</option>
         <option value="pitchBend">Pitch Bend</option>
       </select>
     </label>
     <label>Channel
-      <select name="channel" id="channel">
+      <select name="channel" id="program-channel">
         <option value="0">1</option>
         <option value="1">2</option>
         <option value="2">3</option>
@@ -107,6 +107,473 @@
         <option value="15">16</option>
       </select>
     </label>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <div class="action-values">
+    <label id="program-note-label" class="active">Note
+      <select name="program-note" id="program-note">
+        <option value="0">C</option>
+        <option value="1">C&#9839;/D&#9837;</option>
+        <option value="2">D</option>
+        <option value="3">D&#9839;/E&#9837;</option>
+        <option value="4">E</option>
+        <option value="5">F</option>
+        <option value="6">F&#9839;/G&#9837;</option>
+        <option value="7">G</option>
+        <option value="8">G&#9839;/A&#9837;</option>
+        <option value="9">A</option>
+        <option value="10">A&#9839;/B&#9837;</option>
+        <option value="11">B</option>
+      </select>
+    </label>
+    <label id="program-octave-label" class="active">Octave
+      <select name="program-octave" id="program-octave">
+        <option value="0">-1</option>
+        <option value="1">0</option>
+        <option value="2">1</option>
+        <option value="3">2</option>
+        <option value="4">3</option>
+        <option value="5" selected>4</option>
+        <option value="6">5</option>
+        <option value="7">6</option>
+        <option value="8">7</option>
+        <option value="9">8</option>
+        <option value="10">9</option>
+      </select>
+    </label>
+    <label id="program-velocity-label" class="active">Velocity
+      <input type="number" name="program-velocity" id="program-velocity" value="64" min="0" max="127">
+    </label>
+    <label id="program-pressure-label">Pressure
+      <input type="number" name="program-pressure" id="program-pressure" value="64" min="0" max="127">
+    </label>
+    <label id="program-control-function-label">Function
+      <select name="program-control-function" id="program-control-function">
+    <option value="0">0 - Bank Select (MSB)</option>
+    <option value="1">1 - Modulation Wheel (MSB)</option>
+    <option value="2">2 - Breath Controller (MSB)</option>
+    <option value="3">3 - Undefined (MSB)</option>
+    <option value="4">4 - Foot Pedal (MSB)</option>
+    <option value="5">5 - Portamento Time (MSB)</option>
+    <option value="6">6 - Data Entry (MSB)</option>
+    <option value="7">7 - Volume (MSB)</option>
+    <option value="8">8 - Balance (MSB)</option>
+    <option value="9">9 - Undefined (MSB)</option>
+    <option value="10">10 - Pan (MSB)</option>
+    <option value="11">11 - Expression (MSB)</option>
+    <option value="12">12 - Effect Controller 1 (MSB)</option>
+    <option value="13">13 - Effect Controller 2 (MSB)</option>
+    <option value="14">14 - Undefined (MSB)</option>
+    <option value="15">15 - Undefined (MSB)</option>
+    <option value="16">16 - General Purpose 1 (MSB)</option>
+    <option value="17">17 - General Purpose 2 (MSB)</option>
+    <option value="18">18 - General Purpose 3 (MSB)</option>
+    <option value="19">19 - General Purpose 4 (MSB)</option>
+    <option value="20">20 - Undefined (MSB)</option>
+    <option value="21">21 - Undefined (MSB)</option>
+    <option value="22">22 - Undefined (MSB)</option>
+    <option value="23">23 - Undefined (MSB)</option>
+    <option value="24">24 - Undefined (MSB)</option>
+    <option value="25">25 - Undefined (MSB)</option>
+    <option value="26">26 - Undefined (MSB)</option>
+    <option value="27">27 - Undefined (MSB)</option>
+    <option value="28">28 - Undefined (MSB)</option>
+    <option value="29">29 - Undefined (MSB)</option>
+    <option value="30">30 - Undefined (MSB)</option>
+    <option value="31">31 - Undefined (MSB)</option>
+    <option value="32">32 - Bank Select (LSB)</option>
+    <option value="33">33 - Modulation Wheel (LSB)</option>
+    <option value="34">34 - Breath Controller (LSB)</option>
+    <option value="35">35 - Undefined (LSB)</option>
+    <option value="36">36 - Foot Pedal (LSB)</option>
+    <option value="37">37 - Portamento Time (LSB)</option>
+    <option value="38">38 - Data Entry (LSB)</option>
+    <option value="39">39 - Volume (LSB)</option>
+    <option value="40">40 - Balance (LSB)</option>
+    <option value="41">41 - Undefined (LSB)</option>
+    <option value="42">42 - Pan (LSB)</option>
+    <option value="43">43 - Expression (LSB)</option>
+    <option value="44">44 - Effect Controller 1 (LSB)</option>
+    <option value="45">45 - Effect Controller 2 (LSB)</option>
+    <option value="46">46 - Undefined (LSB)</option>
+    <option value="47">47 - Undefined (LSB)</option>
+    <option value="48">48 - General Purpose 1 (LSB)</option>
+    <option value="49">49 - General Purpose 2 (LSB)</option>
+    <option value="50">50 - General Purpose 3 (LSB)</option>
+    <option value="51">51 - General Purpose 4 (LSB)</option>
+    <option value="52">52 - Undefined (LSB)</option>
+    <option value="53">53 - Undefined (LSB)</option>
+    <option value="54">54 - Undefined (LSB)</option>
+    <option value="55">55 - Undefined (LSB)</option>
+    <option value="56">56 - Undefined (LSB)</option>
+    <option value="57">57 - Undefined (LSB)</option>
+    <option value="58">58 - Undefined (LSB)</option>
+    <option value="59">59 - Undefined (LSB)</option>
+    <option value="60">60 - Undefined (LSB)</option>
+    <option value="61">61 - Undefined (LSB)</option>
+    <option value="62">62 - Undefined (LSB)</option>
+    <option value="63">63 - Undefined (LSB)</option>
+    <option value="64">64 - Damper Pedal on/off</option>
+    <option value="65">65 - Portamento on/off</option>
+    <option value="66">66 - Sostenuto Pedal on/off</option>
+    <option value="67">67 - Soft Pedal on/off</option>
+    <option value="68">68 - Legato FootSwitch</option>
+    <option value="69">69 - Hold 2</option>
+    <option value="70">70 - Sound Controller 1</option>
+    <option value="71">71 - Sound Controller 2</option>
+    <option value="72">72 - Sound Controller 3</option>
+    <option value="73">73 - Sound Controller 4</option>
+    <option value="74">74 - Sound Controller 5</option>
+    <option value="75">75 - Sound Controller 6</option>
+    <option value="76">76 - Sound Controller 7</option>
+    <option value="77">77 - Sound Controller 8</option>
+    <option value="78">78 - Sound Controller 9</option>
+    <option value="79">79 - Sound Controller 10</option>
+    <option value="80">80 - General Purpose 1</option>
+    <option value="81">81 - General Purpose 2</option>
+    <option value="82">82 - General Purpose 3</option>
+    <option value="83">83 - General Purpose 4</option>
+    <option value="84">84 - Portamento CC Control</option>
+    <option value="85">85 - Undefined</option>
+    <option value="86">86 - Undefined</option>
+    <option value="87">87 - Undefined</option>
+    <option value="88">88 - High Resolution Velocity</option>
+    <option value="89">89 - Undefined</option>
+    <option value="90">90 - Undefined</option>
+    <option value="91">91 - Effect 1 Depth</option>
+    <option value="92">92 - Effect 2 Depth</option>
+    <option value="93">93 - Effect 3 Depth</option>
+    <option value="94">94 - Effect 4 Depth</option>
+    <option value="95">95 - Effect 5 Depth</option>
+    <option value="96">96 - (+1) Data Increment</option>
+    <option value="97">97 - (-1) Data Decrement</option>
+    <option value="98">98 - NRPN (LSB)</option>
+    <option value="99">99 - NRPN (MSB)</option>
+    <option value="100">100 - RPN (LSB)</option>
+    <option value="101">101 - RPN (MSB)</option>
+    <option value="102">102 - Undefined</option>
+    <option value="103">103 - Undefined</option>
+    <option value="104">104 - Undefined</option>
+    <option value="105">105 - Undefined</option>
+    <option value="106">106 - Undefined</option>
+    <option value="107">107 - Undefined</option>
+    <option value="108">108 - Undefined</option>
+    <option value="109">109 - Undefined</option>
+    <option value="110">110 - Undefined</option>
+    <option value="111">111 - Undefined</option>
+    <option value="112">112 - Undefined</option>
+    <option value="113">113 - Undefined</option>
+    <option value="114">114 - Undefined</option>
+    <option value="115">115 - Undefined</option>
+    <option value="116">116 - Undefined</option>
+    <option value="117">117 - Undefined</option>
+    <option value="118">118 - Undefined</option>
+    <option value="119">119 - Undefined</option>
+    <option value="120">120 - All Sound Off</option>
+    <option value="121">121 - Reset All Controllers</option>
+    <option value="122">122 - Local on/off Switch</option>
+    <option value="123">123 - All Notes Off</option>
+    <option value="124">124 - Omni Mode Off</option>
+    <option value="125">125 - Omni Mode On</option>
+    <option value="126">126 - Mono Mode</option>
+    <option value="127">127 - Poly Mode</option>
+      </select>
+    </label>
+    <label id="program-value-label">Value
+      <input type="number" name="program-value" id="program-value" value="64" min="0" max="127">
+    </label>
+    <label id="program-range-label">Instrument Range
+      <select name="program-range" id="program-range">
+        <option value="1">+/- 1 semitone</option>
+        <option value="2">+/- 2 semitones</option>
+        <option value="3">+/- 3 semitones</option>
+        <option value="4">+/- 4 semitones</option>
+        <option value="5">+/- 5 semitones</option>
+        <option value="6">+/- 6 semitones</option>
+        <option value="7">+/- 7 semitones</option>
+        <option value="8">+/- 8 semitones</option>
+        <option value="9">+/- 9 semitones</option>
+        <option value="10">+/- 10 semitones</option>
+        <option value="11">+/- 11 semitones</option>
+        <option value="12" selected>+/- 12 semitones</option>
+        <option value="13">+/- 13 semitones</option>
+        <option value="14">+/- 14 semitones</option>
+        <option value="15">+/- 15 semitones</option>
+        <option value="16">+/- 16 semitones</option>
+        <option value="17">+/- 17 semitones</option>
+        <option value="18">+/- 18 semitones</option>
+        <option value="19">+/- 19 semitones</option>
+        <option value="20">+/- 20 semitones</option>
+        <option value="21">+/- 21 semitones</option>
+        <option value="22">+/- 22 semitones</option>
+        <option value="23">+/- 23 semitones</option>
+        <option value="24">+/- 24 semitones</option>
+      </select>
+    </label>
+    <label id="program-semitones-label">Semitones
+      <input type="number" name="program-semitones" id="program-semitones" value="0" min="-24" max="24">
+    </label>
+    <p><i>Note C4 is middle C</i></p>
+    </div>
+    <button id="program-send">Send</button>
+  </section>
+  <section id="realtime">
+    <label>Direction
+      <select name="direction" id="realtime-direction">
+        <option value="pressEast">Press East</option>
+        <option value="pressWest">Press West</option>
+        <option value="pressSouth">Press South</option>
+        <option value="pressNorth">Press North</option>
+        <option value="releaseEast">Release East</option>
+        <option value="releaseWest">Release West</option>
+        <option value="releaseSouth">Release South</option>
+        <option value="releaseNorth">Release North</option>
+      </select>
+    </label>
+    <label>Action
+      <select name="action" id="realtime-action">
+        <option value="noteOff">Note Off</option>
+        <option value="noteOn">Note On</option>
+        <option value="keyAftertouch">Key Aftertouch</option>
+        <option value="controlChange">Control Change</option>
+        <option value="programChange">Program Change</option>
+        <option value="channelAftertouch">Channel Aftertouch</option>
+        <option value="pitchBend">Pitch Bend</option>
+      </select>
+    </label>
+    <label>Channel
+      <select name="channel" id="realtime-channel">
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+        <option value="4">5</option>
+        <option value="5">6</option>
+        <option value="6">7</option>
+        <option value="7">8</option>
+        <option value="8">9</option>
+        <option value="9">10</option>
+        <option value="10">11</option>
+        <option value="11">12</option>
+        <option value="12">13</option>
+        <option value="13">14</option>
+        <option value="14">15</option>
+        <option value="15">16</option>
+      </select>
+    </label>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <div class="action-values">
+    <label id="realtime-note-label" class="active">Note
+      <select name="realtime-note" id="realtime-note">
+        <option value="0">C</option>
+        <option value="1">C&#9839;/D&#9837;</option>
+        <option value="2">D</option>
+        <option value="3">D&#9839;/E&#9837;</option>
+        <option value="4">E</option>
+        <option value="5">F</option>
+        <option value="6">F&#9839;/G&#9837;</option>
+        <option value="7">G</option>
+        <option value="8">G&#9839;/A&#9837;</option>
+        <option value="9">A</option>
+        <option value="10">A&#9839;/B&#9837;</option>
+        <option value="11">B</option>
+      </select>
+    </label>
+    <label id="realtime-octave-label" class="active">Octave
+      <select name="realtime-octave" id="realtime-octave">
+        <option value="0">-1</option>
+        <option value="1">0</option>
+        <option value="2">1</option>
+        <option value="3">2</option>
+        <option value="4">3</option>
+        <option value="5" selected>4</option>
+        <option value="6">5</option>
+        <option value="7">6</option>
+        <option value="8">7</option>
+        <option value="9">8</option>
+        <option value="10">9</option>
+      </select>
+    </label>
+    <label id="realtime-velocity-label" class="active">Velocity
+      <input type="number" name="realtime-velocity" id="realtime-velocity" value="64" min="0" max="127">
+    </label>
+    <label id="realtime-pressure-label">Pressure
+      <input type="number" name="realtime-pressure" id="realtime-pressure" value="64" min="0" max="127">
+    </label>
+    <label id="realtime-control-function-label">Function
+      <select name="realtime-control-function" id="realtime-control-function">
+    <option value="0">0 - Bank Select (MSB)</option>
+    <option value="1">1 - Modulation Wheel (MSB)</option>
+    <option value="2">2 - Breath Controller (MSB)</option>
+    <option value="3">3 - Undefined (MSB)</option>
+    <option value="4">4 - Foot Pedal (MSB)</option>
+    <option value="5">5 - Portamento Time (MSB)</option>
+    <option value="6">6 - Data Entry (MSB)</option>
+    <option value="7">7 - Volume (MSB)</option>
+    <option value="8">8 - Balance (MSB)</option>
+    <option value="9">9 - Undefined (MSB)</option>
+    <option value="10">10 - Pan (MSB)</option>
+    <option value="11">11 - Expression (MSB)</option>
+    <option value="12">12 - Effect Controller 1 (MSB)</option>
+    <option value="13">13 - Effect Controller 2 (MSB)</option>
+    <option value="14">14 - Undefined (MSB)</option>
+    <option value="15">15 - Undefined (MSB)</option>
+    <option value="16">16 - General Purpose 1 (MSB)</option>
+    <option value="17">17 - General Purpose 2 (MSB)</option>
+    <option value="18">18 - General Purpose 3 (MSB)</option>
+    <option value="19">19 - General Purpose 4 (MSB)</option>
+    <option value="20">20 - Undefined (MSB)</option>
+    <option value="21">21 - Undefined (MSB)</option>
+    <option value="22">22 - Undefined (MSB)</option>
+    <option value="23">23 - Undefined (MSB)</option>
+    <option value="24">24 - Undefined (MSB)</option>
+    <option value="25">25 - Undefined (MSB)</option>
+    <option value="26">26 - Undefined (MSB)</option>
+    <option value="27">27 - Undefined (MSB)</option>
+    <option value="28">28 - Undefined (MSB)</option>
+    <option value="29">29 - Undefined (MSB)</option>
+    <option value="30">30 - Undefined (MSB)</option>
+    <option value="31">31 - Undefined (MSB)</option>
+    <option value="32">32 - Bank Select (LSB)</option>
+    <option value="33">33 - Modulation Wheel (LSB)</option>
+    <option value="34">34 - Breath Controller (LSB)</option>
+    <option value="35">35 - Undefined (LSB)</option>
+    <option value="36">36 - Foot Pedal (LSB)</option>
+    <option value="37">37 - Portamento Time (LSB)</option>
+    <option value="38">38 - Data Entry (LSB)</option>
+    <option value="39">39 - Volume (LSB)</option>
+    <option value="40">40 - Balance (LSB)</option>
+    <option value="41">41 - Undefined (LSB)</option>
+    <option value="42">42 - Pan (LSB)</option>
+    <option value="43">43 - Expression (LSB)</option>
+    <option value="44">44 - Effect Controller 1 (LSB)</option>
+    <option value="45">45 - Effect Controller 2 (LSB)</option>
+    <option value="46">46 - Undefined (LSB)</option>
+    <option value="47">47 - Undefined (LSB)</option>
+    <option value="48">48 - General Purpose 1 (LSB)</option>
+    <option value="49">49 - General Purpose 2 (LSB)</option>
+    <option value="50">50 - General Purpose 3 (LSB)</option>
+    <option value="51">51 - General Purpose 4 (LSB)</option>
+    <option value="52">52 - Undefined (LSB)</option>
+    <option value="53">53 - Undefined (LSB)</option>
+    <option value="54">54 - Undefined (LSB)</option>
+    <option value="55">55 - Undefined (LSB)</option>
+    <option value="56">56 - Undefined (LSB)</option>
+    <option value="57">57 - Undefined (LSB)</option>
+    <option value="58">58 - Undefined (LSB)</option>
+    <option value="59">59 - Undefined (LSB)</option>
+    <option value="60">60 - Undefined (LSB)</option>
+    <option value="61">61 - Undefined (LSB)</option>
+    <option value="62">62 - Undefined (LSB)</option>
+    <option value="63">63 - Undefined (LSB)</option>
+    <option value="64">64 - Damper Pedal on/off</option>
+    <option value="65">65 - Portamento on/off</option>
+    <option value="66">66 - Sostenuto Pedal on/off</option>
+    <option value="67">67 - Soft Pedal on/off</option>
+    <option value="68">68 - Legato FootSwitch</option>
+    <option value="69">69 - Hold 2</option>
+    <option value="70">70 - Sound Controller 1</option>
+    <option value="71">71 - Sound Controller 2</option>
+    <option value="72">72 - Sound Controller 3</option>
+    <option value="73">73 - Sound Controller 4</option>
+    <option value="74">74 - Sound Controller 5</option>
+    <option value="75">75 - Sound Controller 6</option>
+    <option value="76">76 - Sound Controller 7</option>
+    <option value="77">77 - Sound Controller 8</option>
+    <option value="78">78 - Sound Controller 9</option>
+    <option value="79">79 - Sound Controller 10</option>
+    <option value="80">80 - General Purpose 1</option>
+    <option value="81">81 - General Purpose 2</option>
+    <option value="82">82 - General Purpose 3</option>
+    <option value="83">83 - General Purpose 4</option>
+    <option value="84">84 - Portamento CC Control</option>
+    <option value="85">85 - Undefined</option>
+    <option value="86">86 - Undefined</option>
+    <option value="87">87 - Undefined</option>
+    <option value="88">88 - High Resolution Velocity</option>
+    <option value="89">89 - Undefined</option>
+    <option value="90">90 - Undefined</option>
+    <option value="91">91 - Effect 1 Depth</option>
+    <option value="92">92 - Effect 2 Depth</option>
+    <option value="93">93 - Effect 3 Depth</option>
+    <option value="94">94 - Effect 4 Depth</option>
+    <option value="95">95 - Effect 5 Depth</option>
+    <option value="96">96 - (+1) Data Increment</option>
+    <option value="97">97 - (-1) Data Decrement</option>
+    <option value="98">98 - NRPN (LSB)</option>
+    <option value="99">99 - NRPN (MSB)</option>
+    <option value="100">100 - RPN (LSB)</option>
+    <option value="101">101 - RPN (MSB)</option>
+    <option value="102">102 - Undefined</option>
+    <option value="103">103 - Undefined</option>
+    <option value="104">104 - Undefined</option>
+    <option value="105">105 - Undefined</option>
+    <option value="106">106 - Undefined</option>
+    <option value="107">107 - Undefined</option>
+    <option value="108">108 - Undefined</option>
+    <option value="109">109 - Undefined</option>
+    <option value="110">110 - Undefined</option>
+    <option value="111">111 - Undefined</option>
+    <option value="112">112 - Undefined</option>
+    <option value="113">113 - Undefined</option>
+    <option value="114">114 - Undefined</option>
+    <option value="115">115 - Undefined</option>
+    <option value="116">116 - Undefined</option>
+    <option value="117">117 - Undefined</option>
+    <option value="118">118 - Undefined</option>
+    <option value="119">119 - Undefined</option>
+    <option value="120">120 - All Sound Off</option>
+    <option value="121">121 - Reset All Controllers</option>
+    <option value="122">122 - Local on/off Switch</option>
+    <option value="123">123 - All Notes Off</option>
+    <option value="124">124 - Omni Mode Off</option>
+    <option value="125">125 - Omni Mode On</option>
+    <option value="126">126 - Mono Mode</option>
+    <option value="127">127 - Poly Mode</option>
+      </select>
+    </label>
+    <label id="realtime-value-label">Value
+      <input type="number" name="realtime-value" id="realtime-value" value="64" min="0" max="127">
+    </label>
+    <label id="realtime-range-label">Instrument Range
+      <select name="realtime-range" id="realtime-range">
+        <option value="1">+/- 1 semitone</option>
+        <option value="2">+/- 2 semitones</option>
+        <option value="3">+/- 3 semitones</option>
+        <option value="4">+/- 4 semitones</option>
+        <option value="5">+/- 5 semitones</option>
+        <option value="6">+/- 6 semitones</option>
+        <option value="7">+/- 7 semitones</option>
+        <option value="8">+/- 8 semitones</option>
+        <option value="9">+/- 9 semitones</option>
+        <option value="10">+/- 10 semitones</option>
+        <option value="11">+/- 11 semitones</option>
+        <option value="12" selected>+/- 12 semitones</option>
+        <option value="13">+/- 13 semitones</option>
+        <option value="14">+/- 14 semitones</option>
+        <option value="15">+/- 15 semitones</option>
+        <option value="16">+/- 16 semitones</option>
+        <option value="17">+/- 17 semitones</option>
+        <option value="18">+/- 18 semitones</option>
+        <option value="19">+/- 19 semitones</option>
+        <option value="20">+/- 20 semitones</option>
+        <option value="21">+/- 21 semitones</option>
+        <option value="22">+/- 22 semitones</option>
+        <option value="23">+/- 23 semitones</option>
+        <option value="24">+/- 24 semitones</option>
+      </select>
+    </label>
+    <label id="realtime-semitones-label">Semitones
+      <input type="number" name="realtime-semitones" id="realtime-semitones" value="0" min="-24" max="24">
+    </label>
+    <p><i>Note C4 is middle C</i></p>
+    </div>
+    <button id="realtime-send">Send</button>
   </section>
 </div>
 </div>

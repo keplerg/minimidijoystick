@@ -12,11 +12,21 @@ const actions = {
     'noteOff': 0,
     'noteOn': 1,
     'keyAftertouch': 2,
-    'controllerCode': 3,
+    'controlChange': 3,
     'programChange': 4,
     'channelAftertouch': 5,
     'pitchBend': 6,
     'nothing': 7
+}
+const actionFields = {
+    'noteOff': ['note','octave','velocity'],
+    'noteOn': ['note','octave','velocity'],
+    'keyAftertouch': ['note','octave','pressure'],
+    'controlChange': ['control-function','value'],
+    'programChange': ['value'],
+    'channelAftertouch': ['pressure'],
+    'pitchBend': ['range','semitones'],
+    'nothing': []
 }
 var inputs;
 var outputs;
@@ -52,6 +62,51 @@ function onPortClosed(device) {
     console.log('failed!');
 }
 
+function onProgramActionSelect(e) {
+    let action = this.options[this.selectedIndex].value;
+    displayActionFields('program', action);
+}
+
+function onRealtimeActionSelect(e) {
+    let action = this.options[this.selectedIndex].value;
+    displayActionFields('realtime', action);
+}
+
+function displayActionFields(screen, action) {
+    let allFields = ['note','octave','velocity','pressure','control-function','value','range','semitones'];
+    let fields = actionFields[action];
+    for (const field of allFields) {
+        let el = document.getElementById(screen+'-'+field+'-label');
+        if (fields.includes(field)) {
+            el.style.display = 'inline-block';
+        } else {
+            el.style.display = 'none';
+        }
+    }
+}
+
+function onProgramSend(e) {
+    let presetSelect = document.getElementById('program-preset');
+    let preset = parseInt(presetSelect.options[presetSelect.selectedIndex].value);
+    let directionSelect = document.getElementById('program-direction');
+    let direction = parseInt(directions[directionSelect.options[directionSelect.selectedIndex].value]);
+    let channelSelect = document.getElementById('program-channel');
+    let channel = parseInt(channelSelect.options[channelSelect.selectedIndex].value);
+    let actionSelect = document.getElementById('program-action');
+    let action = actionSelect.options[actionSelect.selectedIndex].value;
+    programAction(preset, direction, channel, action);
+}
+
+function onRealtimeSend(e) {
+    let directionSelect = document.getElementById('realtime-direction');
+    let direction = parseInt(directions[directionSelect.options[directionSelect.selectedIndex].value]);
+    let channelSelect = document.getElementById('realtime-channel');
+    let channel = parseInt(channelSelect.options[channelSelect.selectedIndex].value);
+    let actionSelect = document.getElementById('realtime-action');
+    let action = actionSelect.options[actionSelect.selectedIndex].value;
+    realtimeAction(direction, channel, action);
+}
+
 function navSelect(screen) {
     document.getElementById('screens').style.marginLeft = (-100 * screen) + '%';
     for(let i = 0; i < 3; i++) {
@@ -64,12 +119,11 @@ function navSelect(screen) {
     }
 }
 
-function selectProgram(program) {
-    console.log('selected: '+program);
+function selectPreset(preset) {
     for(let i = 0; i < 16; i++) {
-        let el = document.getElementById('program-'+i);
-        if (i == program) {
-            sendMIDIMessage([0xC0, program]);
+        let el = document.getElementById('preset-'+i);
+        if (i == preset) {
+            sendMIDIMessage([192, preset]);
             el.style.backgroundColor = "green";
         } else {
             el.style.backgroundColor = "transparent";
@@ -84,21 +138,116 @@ function onMIDIFailure() {
 function sendMIDIMessage(sequence) {
     var output = outputs.get(deviceId);
     if (output != undefined) {
-        console.log(sequence);
+        let outputSequence = '['
+        let first = true;
+        for (const byte of sequence) {
+            if (first) {
+                first = false;
+            } else {
+                outputSequence += ', ';
+            }
+            if (byte < 16) {
+                outputSequence += '0x0';
+            } else {
+                outputSequence += '0x';
+            }
+            outputSequence += byte.toString(16).toUpperCase();
+        }
+        outputSequence += ']'
+        console.log(outputSequence + ' [' + sequence + ']');
         output.send(sequence);
     }
 }
 
-function setPitchBend(preset, channel, direction, semitones, range) {
-    var bendVal = Math.round((8191.5 / range) * semitones + 8191.5);
-    var msb = Math.trunc(bendVal / 128);
-    var lsb = bendVal - (msb * 128);
-    sendMIDIMessage([0xB0, 0x44, preset]);
-    sendMIDIMessage([0xB0, 0x40, (preset * 8) + directions[direction]]);
-    sendMIDIMessage([0xB0, 0x41, channel + (actions['pitchBend'] * 8)]);
-    sendMIDIMessage([0xB0, 0x43, msb]);
-    sendMIDIMessage([0xB0, 0x42, lsb]);
-    sendMIDIMessage([0xB0, 0x45, preset]);
+function programAction(preset, direction, channel, action) {
+    let allFields = ['note','octave','velocity','pressure','control-function','value','range','semitones'];
+    let fields = actionFields[action];
+    let values = {};
+    for (const field of allFields) {
+        if (fields.includes(field)) {
+            let el = document.getElementById('program-'+field);
+            values[field] = parseInt(el.value);
+        }
+    }
+    console.log(values);
+    sendMIDIMessage([176, 44, preset]);
+    sendMIDIMessage([176, 40, (preset * 8) + direction]);
+    sendMIDIMessage([176, 41, (actions[action] * 16) + channel]);
+    switch (action) {
+        case 'noteOff':
+        case 'noteOn':
+            let note = values['note'] + values['octave'] * 12;
+            sendMIDIMessage([176, 42, note]);
+            sendMIDIMessage([176, 43, values['velocity']]);
+            break;
+        case 'keyAftertouch':
+            let note2 = values['note'] + values['octave'] * 12;
+            sendMIDIMessage([176, 42, note2]);
+            sendMIDIMessage([176, 43, values['pressure']]);
+            break;
+        case 'controlChange':
+            sendMIDIMessage([176, 42, values['control-function']]);
+            sendMIDIMessage([176, 43, values['value']]);
+            break;
+        case 'programChange':
+            sendMIDIMessage([176, 42, values['value']]);
+            break;
+        case 'channelAftertouch':
+            sendMIDIMessage([176, 42, values['pressure']]);
+            break;
+        case 'pitchBend':
+            let bendVal = Math.round((8191.5 / values['range']) * values['semitones'] + 8191.5);
+            let msb = Math.trunc(bendVal / 128);
+            let lsb = bendVal - (msb * 128);
+            sendMIDIMessage([176, 42, lsb]);
+            sendMIDIMessage([176, 43, msb]);
+            break;
+    }
+    sendMIDIMessage([176, 45, preset]);
+}
+
+function realtimeAction(direction, channel, action) {
+    let allFields = ['note','octave','velocity','pressure','control-function','value','range','semitones'];
+    let fields = actionFields[action];
+    let values = {};
+    for (const field of allFields) {
+        if (fields.includes(field)) {
+            let el = document.getElementById('realtime-'+field);
+            values[field] = parseInt(el.value);
+        }
+    }
+    console.log(values);
+    sendMIDIMessage([176, 16 + direction, (actions[action] * 16) + channel]);
+    switch (action) {
+        case 'noteOff':
+        case 'noteOn':
+            let note = values['note'] + values['octave'] * 12;
+            sendMIDIMessage([176, 24 + direction, note]);
+            sendMIDIMessage([176, 32 + direction, values['velocity']]);
+            break;
+        case 'keyAftertouch':
+            let note2 = values['note'] + values['octave'] * 12;
+            sendMIDIMessage([176, 24 + direction, note2]);
+            sendMIDIMessage([176, 32 + direction, values['pressure']]);
+            break;
+        case 'controlChange':
+            sendMIDIMessage([176, 24 + direction, values['control-function']]);
+            sendMIDIMessage([176, 32 + direction, values['value']]);
+            break;
+        case 'programChange':
+            sendMIDIMessage([176, 24 + direction, values['value']]);
+            break;
+        case 'channelAftertouch':
+            sendMIDIMessage([176, 24 + direction, values['pressure']]);
+            break;
+        case 'pitchBend':
+            let bendVal = Math.round((8191.5 / values['range']) * values['semitones'] + 8191.5);
+            let msb = Math.trunc(bendVal / 128);
+            let lsb = bendVal - (msb * 128);
+            sendMIDIMessage([176, 24 + direction, lsb]);
+            sendMIDIMessage([176, 32 + direction, msb]);
+            break;
+    }
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -114,6 +263,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     let el = document.getElementById("output-select");
     el.addEventListener("click", onMIDISelect, false);
+
+    el = document.getElementById("program-action");
+    el.addEventListener("click", onProgramActionSelect, false);
+
+    el = document.getElementById("program-send");
+    el.addEventListener("click", onProgramSend, false);
+
+    el = document.getElementById("realtime-action");
+    el.addEventListener("click", onRealtimeActionSelect, false);
+
+    el = document.getElementById("realtime-send");
+    el.addEventListener("click", onRealtimeSend, false);
 
     el = document.getElementById('nav-0');
     el.style.backgroundColor = "royalblue";
