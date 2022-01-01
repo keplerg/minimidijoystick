@@ -68,6 +68,7 @@ button {
 
 button:active {
     padding: 0 2.5vw;
+    background-color: yellow;
 }
 
 #connected-state {
