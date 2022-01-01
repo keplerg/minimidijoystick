@@ -124,9 +124,9 @@ function selectPreset(preset) {
     for(let i = 0; i < 16; i++) {
         let el = document.getElementById('preset-'+i);
         if (i == preset) {
-            el.style.backgroundColor = "yellow";
+            el.style.backgroundColor = "lime";
             sendMIDIMessage([192, preset]);
-            el.style.backgroundColor = "green";
+            setTimeout('document.getElementById("preset-'+i+'").style.backgroundColor = "green"', 100);
         } else {
             el.style.backgroundColor = "transparent";
         }
