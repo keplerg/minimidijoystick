@@ -2,6 +2,7 @@
 <hmtl>
 <head>
   <title>miniMIDI Joystick</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -9,9 +10,7 @@
 <div id="wrapper"> 
 <h1>MMJ</h1>
 <nav>
-  <select id="output-select">
-    <option value="">Select MIDI Device</option>
-  </select>
+  <div id="connected-state" class="led-box"><div class="led-red"></div></div>
   <ul>
     <li id="nav-0"><a href="javascript:navSelect(0);">Preset</a></li>
     <li id="nav-1"><a href="javascript:navSelect(1);">Program</a></li>

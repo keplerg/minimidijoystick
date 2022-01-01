@@ -31,26 +31,27 @@ const actionFields = {
 var inputs;
 var outputs;
 var deviceId;
-var statechange;
 
 
 function onMIDISuccess(midiAccess) {
     inputs = midiAccess.inputs;
     outputs = midiAccess.outputs;
-    statechange = midiAccess.onstatechange;
-    for (output of outputs.values()) {
-        var opt = document.createElement("option");
-        opt.text = output.name;
-        opt.value = output.id;
-        document.getElementById("output-select").add(opt);
-    }
+    midiAccess.onstatechange = onMIDIStateChange;
+    onMIDIStateChange();
 }
 
-function onMIDISelect(e) {
-    deviceId = this.options[this.selectedIndex].value;
-    var output = outputs.get(deviceId);
-    if (output != undefined) {
-        output.open().then(onPortOpen, onPortClosed);
+function onMIDIStateChange(e) {
+    if (e != undefined) {
+        inputs = e.target.inputs;
+        outputs = e.target.outputs;
+    }
+    document.getElementById("connected-state").firstChild.className = 'led-red';
+    for (output of outputs.values()) {
+        if (output.name.substr(0, 17).toLowerCase() == "minimidi joystick") {
+            deviceId = output.id;
+            document.getElementById("connected-state").firstChild.className = 'led-green';
+            output.open().then(onPortOpen, onPortClosed);
+        }
     }
 }
 
@@ -123,6 +124,7 @@ function selectPreset(preset) {
     for(let i = 0; i < 16; i++) {
         let el = document.getElementById('preset-'+i);
         if (i == preset) {
+            el.style.backgroundColor = "yellow";
             sendMIDIMessage([192, preset]);
             el.style.backgroundColor = "green";
         } else {
@@ -260,9 +262,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.querySelector('nav').innerHTML = '';
         document.querySelector('#programs').innerHTML = 'Error: No WebMIDI support.';
     }
-
-    let el = document.getElementById("output-select");
-    el.addEventListener("click", onMIDISelect, false);
 
     el = document.getElementById("program-action");
     el.addEventListener("click", onProgramActionSelect, false);
