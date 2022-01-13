@@ -1,4 +1,5 @@
-# minimidijoystick
+# miniMIDI-JOYStick App
+
 This is a web app to control and program the miniMIDI Joystick developed by Professor John Shirley and Brendan Power. You can order a miniMIDI JOYStick from https://www.brendan-power.com/MiniMidiJoy.php
 
 ![JOY_002t](https://user-images.githubusercontent.com/29983796/149365324-ae50a19b-8e3e-45f8-aa7f-20c6c0f16c5f.jpg)
