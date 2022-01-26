@@ -8,5 +8,4 @@ You can try the app out here: https://keplergelotte.com/minimidijoystick/ or jus
 
 ![mmj](https://user-images.githubusercontent.com/29983796/149282307-ae0c3a57-2b68-481b-82f7-6a92b4bed947.png)
 
-
 All this code is free to modify and distribute under the MIT license. If you find any issues please report them here so I can fix them when time permits.
